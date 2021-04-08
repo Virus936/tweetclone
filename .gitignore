@@ -1,3 +1,4 @@
 *.swp
 *.swo
 *.swq
+db.sqlite3
