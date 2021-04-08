@@ -2,4 +2,5 @@
 *.swo
 *.swq
 db.sqlite3
+media/
 *.pyc
