@@ -19,6 +19,10 @@ class Tweet(models.Model):
     def __str__(self):
         return f"{self.author} : {self.content}..."
 
+    @property
+    def numlike(self):
+        return self.likes.count()
+
 
 class Like(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="liker")
