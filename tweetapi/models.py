@@ -5,11 +5,11 @@ User = get_user_model()
 
 
 class Tweet(models.Model):
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="author")
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField("auteur du tweet", blank=True, null=True)
     picture = models.ImageField()
     date_created = models.DateTimeField(auto_now=True)
-    likes = models.ManyToManyField(User, through="Like")
+    likes = models.ManyToManyField(User, through="Like", related_name="like_set")
 
     def __repr__(self):
         return f"{self.author} : {self.content}..."
