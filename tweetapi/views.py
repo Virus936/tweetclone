@@ -1,11 +1,11 @@
 from rest_framework import generics
 from tweetapi.models import Tweet
 from tweetapi.serializer import TweetSerializer
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 class TweetList(generics.ListCreateAPIView):
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     queryset = Tweet.objects.all()
     serializer_class = TweetSerializer
 
