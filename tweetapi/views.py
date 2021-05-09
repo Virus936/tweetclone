@@ -6,7 +6,7 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 class TweetList(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
-    queryset = Tweet.objects.all()
+    queryset = Tweet.objects.all().order_by("-date_created")
     serializer_class = TweetSerializer
 
     def perform_create(self, serializer):
