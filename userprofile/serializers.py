@@ -10,8 +10,17 @@ class ProfileSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    profile = ProfileSerializer(read_only=True)
+    profile = ProfileSerializer()
 
     class Meta:
         model = User
-        fields = ["username", "profile"]
+        fields = ["username", "email", "first_name", "last_name", "profile"]
+
+    def update(self, instance, validated_data):
+        profile_data = validated_data.pop("profile")
+        profile_serializer = ProfileSerializer()
+        super(self.__class__, self).update(instance, validated_data)
+        super(ProfileSerializer, profile_serializer).update(
+            instance.profile, profile_data
+        )
+        return instance
