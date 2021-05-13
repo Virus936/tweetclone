@@ -14,6 +14,7 @@ urlpatterns = [
         "api/token/refresh/", jwt_views.TokenRefreshView.as_view(), name="token_refresh"
     ),
     path("auth/", include("authenticate.urls")),
+    path("profil/", include("userprofile.urls")),
 ]
 
 if settings.DEBUG:
