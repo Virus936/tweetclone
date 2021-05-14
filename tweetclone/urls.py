@@ -5,6 +5,7 @@ from django.conf.urls.static import static
 from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
+    path("", include("userprofile.urls")),
     path("admin/", admin.site.urls),
     path("api/", include("tweetapi.urls")),
     path(
@@ -14,7 +15,6 @@ urlpatterns = [
         "api/token/refresh/", jwt_views.TokenRefreshView.as_view(), name="token_refresh"
     ),
     path("auth/", include("authenticate.urls")),
-    path("profil/", include("userprofile.urls")),
 ]
 
 if settings.DEBUG:
