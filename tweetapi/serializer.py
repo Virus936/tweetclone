@@ -9,7 +9,7 @@ class TweetSerializer(serializers.ModelSerializer):
 
     def get_likeornot(self, obj):
         current_user = self.context["request"].user
-        return current_user in obj.likes.all()
+        return (not current_user.is_authenticated) or current_user in obj.likes.all()
 
     class Meta:
         model = Tweet
@@ -18,4 +18,17 @@ class TweetSerializer(serializers.ModelSerializer):
 
 # Look a this link  to improve the author display
 # https://www.django-rest-framework.org/api-guide/relations/#writable-nested-serializers
-#
+
+
+class TweetLikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tweet
+        fields = ["likes"]
+
+    def update(self, obj, validated_data):
+        current_user = self.context["request"].user
+        if current_user in obj.likes.all():
+            obj.likes.remove(current_user)
+        else:
+            obj.likes.add(current_user)
+        return obj
