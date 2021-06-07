@@ -60,12 +60,15 @@ WSGI_APPLICATION = "tweetclone.wsgi.application"
 
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'ddojr8tero012f',
+        'USER': 'oakmkdoepriuex',
+        'PASSWORD': 'e4a6a0a0a87f19f8e7ea4e9f6a97998a5940e2a1c93a3acaa27093a599096138',
+        'HOST': 'ec2-54-155-92-75.eu-west-1.compute.amazonaws.com',
+        'PORT': '5432',
     }
 }
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
