@@ -8,7 +8,7 @@ SECRET_KEY = "django-insecure-(-0^djokmv8f7n=@vy06piyo(acsuu!b&0143)@4*eheo&)@z=
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['tweetfarm.herokuapp.com/', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['tweetfarm.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 INSTALLED_APPS = [
