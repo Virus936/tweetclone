@@ -8,7 +8,7 @@ SECRET_KEY = "django-insecure-(-0^djokmv8f7n=@vy06piyo(acsuu!b&0143)@4*eheo&)@z=
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://tweetfarm.herokuapp.com/', '127.0.0.1']
+ALLOWED_HOSTS = ['https://tweetfarm.herokuapp.com/', '127.0.0.1', 'localhost']
 
 
 INSTALLED_APPS = [
@@ -17,6 +17,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
+    'whitenoise.runserver_nostatic',
     "django.contrib.staticfiles",
     "tweetapi",
     "userprofile",
@@ -27,6 +28,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -114,14 +116,8 @@ REST_FRAMEWORK = {
 # https://www.codementor.io/@jamesezechukwu/how-to-deploy-django-app-on-heroku-dtsee04d4
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-# PROJECT_ROOT   =   os.path.join(os.path.abspath(__file__))
-# STATIC_ROOT  =   os.path.join(PROJECT_ROOT, 'staticfiles')
-# STATIC_URL = '/static/'
 
-# # Extra lookup directories for collectstatic to find static files
-# STATICFILES_DIRS = (
-    # os.path.join(PROJECT_ROOT, 'static'),
-# )
 
-# #  Add configuration for static files storage using whitenoise
-# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
