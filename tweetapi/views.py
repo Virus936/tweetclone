@@ -1,7 +1,8 @@
-from rest_framework import generics, viewsets
+from rest_framework import generics, mixins, viewsets
 from tweetapi.models import Tweet
 from tweetapi.serializer import TweetSerializer, TweetLikeSerializer
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from userprofile.permissions import IsOwnerOrReadOnly
 
 
 class TweetList(generics.ListCreateAPIView):
@@ -25,11 +26,18 @@ class LikeToggle(generics.UpdateAPIView):
     serializer_class = TweetLikeSerializer
 
 
-class TweetViewSet(viewsets.ModelViewSet):
-    permission_classes = [IsAuthenticatedOrReadOnly]
+class TweetViewSet(
+    mixins.CreateModelMixin,
+    mixins.RetrieveModelMixin,
+    mixins.DestroyModelMixin,
+    mixins.ListModelMixin,
+    viewsets.GenericViewSet,
+):
+    # isOwner or read only for obj but
+    # authenticated_users_only for post
+    permission_classes = [IsOwnerOrReadOnly]
     queryset = Tweet.objects.all().order_by("-date_created")
     serializer_class = TweetSerializer
-    ordering = ("-date_created",)
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)

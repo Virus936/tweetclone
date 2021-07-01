@@ -8,7 +8,7 @@ SECRET_KEY = "django-insecure-(-0^djokmv8f7n=@vy06piyo(acsuu!b&0143)@4*eheo&)@z=
 
 DEBUG = True
 
-ALLOWED_HOSTS = ['tweetfarm.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ["tweetfarm.herokuapp.com", "127.0.0.1", "localhost"]
 
 
 INSTALLED_APPS = [
@@ -17,7 +17,7 @@ INSTALLED_APPS = [
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
-    'whitenoise.runserver_nostatic',
+    "whitenoise.runserver_nostatic",
     "django.contrib.staticfiles",
     "tweetapi",
     "userprofile",
@@ -28,7 +28,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -59,16 +59,15 @@ TEMPLATES = [
 WSGI_APPLICATION = "tweetclone.wsgi.application"
 
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'ddojr8tero012f',
-        'USER': 'oakmkdoepriuex',
-        'PASSWORD': 'e4a6a0a0a87f19f8e7ea4e9f6a97998a5940e2a1c93a3acaa27093a599096138',
-        'HOST': 'ec2-54-155-92-75.eu-west-1.compute.amazonaws.com',
-        'PORT': '5432',
+if DEBUG:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
     }
-}
+else:
+    from .prod import DATABASES
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -115,12 +114,10 @@ REST_FRAMEWORK = {
 }
 
 
-
 # https://www.codementor.io/@jamesezechukwu/how-to-deploy-django-app-on-heroku-dtsee04d4
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
