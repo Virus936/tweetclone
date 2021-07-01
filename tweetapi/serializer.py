@@ -13,7 +13,15 @@ class TweetSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Tweet
-        fields = ["id", "author", "picture", "content", "numlike", "likeornot"]
+        fields = [
+            "id",
+            "author",
+            "picture",
+            "content",
+            "numlike",
+            "likeornot",
+            "date_created",
+        ]
 
 
 # Look a this link  to improve the author display
