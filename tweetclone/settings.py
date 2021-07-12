@@ -7,7 +7,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = "django-insecure-(-0^djokmv8f7n=@vy06piyo(acsuu!b&0143)@4*eheo&)@z="
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["tweetfarm.herokuapp.com", "127.0.0.1", "localhost"]
 
